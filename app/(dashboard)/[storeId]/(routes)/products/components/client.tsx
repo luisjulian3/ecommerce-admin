@@ -5,15 +5,15 @@ import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
 import { Plus } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
-import { CategoryColumn, columns } from "./columns"
+import { ProductColumn, columns } from "./columns"
 import { DataTable } from "@/components/ui/data-table"
 import { ApiList } from "@/components/ui/api-list"
 
-interface CategoryClientProps {
-    data: CategoryColumn[]
+interface ProductClientProps {
+    data: ProductColumn[]
 }
 
-export const CategoryClient: React.FC<CategoryClientProps> = ({
+export const ProductClient: React.FC<ProductClientProps> = ({
     data
 }) => {
     const router = useRouter()
@@ -22,17 +22,17 @@ export const CategoryClient: React.FC<CategoryClientProps> = ({
     return(
         <>
         <div className="flex items-center justify-between">
-            <Heading title={`Category (${data.length})`} description="Settings Category For Store"/>
-            <Button onClick={() => router.push(`/${params.storeId}/categories/new`)}>
+            <Heading title={`Product (${data.length})`} description="Settings Product For Store"/>
+            <Button onClick={() => router.push(`/${params.storeId}/products/new`)}>
             <Plus className="mr-2 h-4 w-4"/>
             Add New
             </Button>
         </div>
         <Separator/>
         <DataTable data={data} columns={columns} searchKey="name"/>
-        <Heading title="API" description="API Categories"/>
+        <Heading title="API" description="API Products"/>
         <Separator/>
-        <ApiList indicatorName="categories" indicatorId="categoryId"/>
+        <ApiList indicatorName="products" indicatorId="productId"/>
         </>
     )
 }

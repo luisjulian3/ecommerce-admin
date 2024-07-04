@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react"
-import { CategoryColumn } from "./columns"
+import { ProductColumn } from "./columns"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react"
@@ -11,7 +11,7 @@ import axios from "axios"
 import { AlertModal } from "@/components/modals/alert-modal"
 
 interface CellActionProps {
-    data: CategoryColumn
+    data: ProductColumn
 }
 
 export const CellAction: React.FC<CellActionProps> = ({
@@ -24,16 +24,16 @@ export const CellAction: React.FC<CellActionProps> = ({
 
      const onCopy = (id: string) => {
         navigator.clipboard.writeText(id)
-        toast.success("Category id copied");
+        toast.success("Product id copied");
     }
 
         const onDelete = async () => {
         try {
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/categories/${data.id}`)
+            await axios.delete(`/api/${params.storeId}/products/${data.id}`)
             router.refresh()
-            router.push(`/${params.storeid}/categories`)
-            toast.success("Category deleted")
+            router.push(`/${params.storeid}/products`)
+            toast.success("Product deleted")
             
         } catch (error) {
             toast.error("Data and Connection Unstable")
@@ -59,7 +59,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                     <Copy className="mr-2 h-4 w-4"/>
                     Copy Id
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/categories/${data.id}`)}>
+                <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/products/${data.id}`)}>
                     <Edit className="mr-2 h-4 w-4"/>
                     Update
                 </DropdownMenuItem>
